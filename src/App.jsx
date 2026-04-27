@@ -77,30 +77,34 @@ function App() {
     if (margem1 >= 60.00) {
       const parcela = margem1;
       const liberado = parcela * 45.13142857142857;
-      return { ativa: true, parcela, liberado, prazo: 120, name: 'Margem A (35%)' };
+      const comissao = liberado * 0.0076;
+      return { ativa: true, parcela, liberado, comissao, prazo: 120, name: 'Margem A (35%)' };
     }
-    return { ativa: false, parcela: 0, liberado: 0, prazo: 0, name: 'Margem A (35%)' };
+    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem A (35%)' };
   }, [margem1]);
 
   const calcM2 = useMemo(() => {
     if (margem2 >= 36.00) {
       const parcela = margem2 * 0.85;
       const liberado = parcela * 17.63855421686747;
-      return { ativa: true, parcela, liberado, prazo: 60, name: 'Margem B (5%)' };
+      const comissao = liberado * 0.08;
+      return { ativa: true, parcela, liberado, comissao, prazo: 60, name: 'Margem B (5%)' };
     }
-    return { ativa: false, parcela: 0, liberado: 0, prazo: 0, name: 'Margem B (5%)' };
+    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem B (5%)' };
   }, [margem2]);
 
   const calcM3 = useMemo(() => {
     if (margem3 >= 36.00) {
       const parcela = margem3 * 0.85;
       const liberado = parcela * 17.63855421686747;
-      return { ativa: true, parcela, liberado, prazo: 60, name: 'Margem C (5%)' };
+      const comissao = liberado * 0.08;
+      return { ativa: true, parcela, liberado, comissao, prazo: 60, name: 'Margem C (5%)' };
     }
-    return { ativa: false, parcela: 0, liberado: 0, prazo: 0, name: 'Margem C (5%)' };
+    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem C (5%)' };
   }, [margem3]);
 
   const totalLiberado = calcM1.liberado + calcM2.liberado + calcM3.liberado;
+  const totalComissao = calcM1.comissao + calcM2.comissao + calcM3.comissao;
 
   // Lógica de Classificação
   const statusInfo = useMemo(() => {
@@ -210,6 +214,13 @@ function App() {
             {formatCurrency(calcInfo.liberado)}
           </span>
         </div>
+
+        {calcInfo.ativa && (
+          <div className="comissao-row">
+            <span className="info-label">Sua Comissão</span>
+            <span className="comissao-value">{formatCurrency(calcInfo.comissao)}</span>
+          </div>
+        )}
       </div>
     );
   };
@@ -243,8 +254,17 @@ function App() {
             {statusInfo.text}
           </div>
           
-          <div className="total-label">Total Liberado</div>
-          <div className="total-value">{formatCurrency(totalLiberado)}</div>
+          <div className="totals-container">
+            <div className="total-box">
+              <div className="total-label">Total Liberado</div>
+              <div className="total-value">{formatCurrency(totalLiberado)}</div>
+            </div>
+            
+            <div className="total-box highlight-box">
+              <div className="total-label" style={{color: '#fbbf24'}}>Comissão Prevista</div>
+              <div className="total-value comissao-total">{formatCurrency(totalComissao)}</div>
+            </div>
+          </div>
           
           <button className="copy-btn" onClick={handleCopy} disabled={totalLiberado === 0 && statusInfo.text === "❌ Descarte"}>
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
