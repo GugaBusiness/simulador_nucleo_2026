@@ -215,19 +215,14 @@ function App() {
           </span>
         </div>
 
-        {calcInfo.ativa && (
-          <div className="comissao-row">
-            <span className="info-label">Sua Comissão</span>
-            <span className="comissao-value">{formatCurrency(calcInfo.comissao)}</span>
-          </div>
-        )}
       </div>
     );
   };
 
   return (
     <div className="app-container">
-      <div className="left-column">
+      {/* Coluna 1: Inputs */}
+      <div className="col-inputs">
         <header className="header">
           <h1>Simulador Núcleo</h1>
           <p>Calculadora de Margem Consignada</p>
@@ -242,8 +237,9 @@ function App() {
         </div>
       </div>
 
-      <div className="right-column">
-        <div className="results-grid">
+      {/* Coluna 2: Resultados */}
+      <div className="col-results">
+        <div className="results-list">
           {renderCard("Margem 1", calcM1, margem1 < 0)}
           {renderCard("Margem 2", calcM2, margem2 < 0)}
           {renderCard("Margem 3", calcM3, margem3 < 0)}
@@ -254,17 +250,8 @@ function App() {
             {statusInfo.text}
           </div>
           
-          <div className="totals-container">
-            <div className="total-box">
-              <div className="total-label">Total Liberado</div>
-              <div className="total-value">{formatCurrency(totalLiberado)}</div>
-            </div>
-            
-            <div className="total-box highlight-box">
-              <div className="total-label" style={{color: '#fbbf24'}}>Comissão Prevista</div>
-              <div className="total-value comissao-total">{formatCurrency(totalComissao)}</div>
-            </div>
-          </div>
+          <div className="total-label">Total Liberado</div>
+          <div className="total-value">{formatCurrency(totalLiberado)}</div>
           
           <button className="copy-btn" onClick={handleCopy} disabled={totalLiberado === 0 && statusInfo.text === "❌ Descarte"}>
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -273,6 +260,44 @@ function App() {
             Copiar para WhatsApp
           </button>
         </div>
+      </div>
+
+      {/* Coluna 3: Comissões */}
+      <div className="col-commissions">
+        {totalComissao > 0 && (
+          <div className="comissao-panel">
+            <h3 className="comissao-title">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Sua Comissão
+            </h3>
+            <div className="comissao-list">
+              {calcM1.ativa && (
+                <div className="comissao-item">
+                  <span>Margem 1 (0,76%)</span>
+                  <span>{formatCurrency(calcM1.comissao)}</span>
+                </div>
+              )}
+              {calcM2.ativa && (
+                <div className="comissao-item">
+                  <span>Margem 2 (8,00%)</span>
+                  <span>{formatCurrency(calcM2.comissao)}</span>
+                </div>
+              )}
+              {calcM3.ativa && (
+                <div className="comissao-item">
+                  <span>Margem 3 (8,00%)</span>
+                  <span>{formatCurrency(calcM3.comissao)}</span>
+                </div>
+              )}
+            </div>
+            <div className="comissao-total-row">
+              <span>Total</span>
+              <span>{formatCurrency(totalComissao)}</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
