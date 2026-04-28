@@ -78,9 +78,9 @@ function App() {
       const parcela = margem1;
       const liberado = parcela * 45.13142857142857;
       const comissao = liberado * 0.0076;
-      return { ativa: true, parcela, liberado, comissao, prazo: 120, name: 'Margem A (35%)' };
+      return { ativa: true, parcela, liberado, comissao, prazo: 120, name: 'Margem A ( 35%)' };
     }
-    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem A (35%)' };
+    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem A ( 35%)' };
   }, [margem1]);
 
   const calcM2 = useMemo(() => {
@@ -230,9 +230,9 @@ function App() {
 
         <div className="glass-panel">
           <div className="input-grid">
-            <CurrencyInput id="m1" label="Margem 1 (Novo)" value={margem1} onChange={setMargem1} />
-            <CurrencyInput id="m2" label="Margem 2 (Cartão)" value={margem2} onChange={setMargem2} />
-            <CurrencyInput id="m3" label="Margem 3 (Cartão)" value={margem3} onChange={setMargem3} />
+            <CurrencyInput id="m1" label="Margem A ( 35%)" value={margem1} onChange={setMargem1} />
+            <CurrencyInput id="m2" label="Margem B (5%)" value={margem2} onChange={setMargem2} />
+            <CurrencyInput id="m3" label="Margem C (5%)" value={margem3} onChange={setMargem3} />
           </div>
         </div>
       </div>
@@ -240,9 +240,9 @@ function App() {
       {/* Coluna 2: Resultados */}
       <div className="col-results">
         <div className="results-list">
-          {renderCard("Margem 1", calcM1, margem1 < 0)}
-          {renderCard("Margem 2", calcM2, margem2 < 0)}
-          {renderCard("Margem 3", calcM3, margem3 < 0)}
+          {renderCard("Margem A ( 35%)", calcM1, margem1 < 0)}
+          {renderCard("Margem B (5%)", calcM2, margem2 < 0)}
+          {renderCard("Margem C (5%)", calcM3, margem3 < 0)}
         </div>
       </div>
 
@@ -278,19 +278,19 @@ function App() {
             <div className="comissao-list">
               {calcM1.ativa && (
                 <div className="comissao-item">
-                  <span>Margem 1 (0,76%)</span>
+                  <span>Margem A (0,76%)</span>
                   <span>{formatCurrency(calcM1.comissao)}</span>
                 </div>
               )}
               {calcM2.ativa && (
                 <div className="comissao-item">
-                  <span>Margem 2 (8,00%)</span>
+                  <span>Margem B (8,00%)</span>
                   <span>{formatCurrency(calcM2.comissao)}</span>
                 </div>
               )}
               {calcM3.ativa && (
                 <div className="comissao-item">
-                  <span>Margem 3 (8,00%)</span>
+                  <span>Margem C (8,00%)</span>
                   <span>{formatCurrency(calcM3.comissao)}</span>
                 </div>
               )}
