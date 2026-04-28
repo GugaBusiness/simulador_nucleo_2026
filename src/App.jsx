@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import './App.css'
-
+import whatsapp3d from './assets/whatsapp-3d.png'
 function formatCurrency(value) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -302,6 +302,17 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Botão de Suporte WhatsApp */}
+      <a 
+        href="https://wa.me/5596991988994?text=Olá,%20preciso%20de%20suporte%20no%20Simulador%20Núcleo" 
+        className="floating-whatsapp-btn"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Suporte via WhatsApp"
+      >
+        <img src={whatsapp3d} alt="WhatsApp" width="60" height="60" className="whatsapp-3d-icon" />
+      </a>
     </div>
   )
 }
