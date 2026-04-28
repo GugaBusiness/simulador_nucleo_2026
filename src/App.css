@@ -1,5 +1,5 @@
 .app-container {
-  max-width: 1400px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -10,18 +10,18 @@
 @media (min-width: 1024px) {
   .app-container {
     display: grid;
-    grid-template-columns: 320px 1fr 320px;
+    grid-template-columns: repeat(4, 1fr);
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
-  .col-inputs, .col-commissions {
+  .col-inputs, .col-summary, .col-commissions {
     position: sticky;
     top: 2rem;
   }
 }
 
-.col-inputs, .col-results, .col-commissions {
+.col-inputs, .col-results, .col-summary, .col-commissions {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;

@@ -244,7 +244,10 @@ function App() {
           {renderCard("Margem 2", calcM2, margem2 < 0)}
           {renderCard("Margem 3", calcM3, margem3 < 0)}
         </div>
+      </div>
 
+      {/* Coluna 3: Classificação / Total */}
+      <div className="col-summary">
         <div className="summary-panel">
           <div className={`status-badge ${statusInfo.class}`}>
             {statusInfo.text}
@@ -262,7 +265,7 @@ function App() {
         </div>
       </div>
 
-      {/* Coluna 3: Comissões */}
+      {/* Coluna 4: Comissões */}
       <div className="col-commissions">
         {totalComissao > 0 && (
           <div className="comissao-panel">
