@@ -78,26 +78,26 @@ function App() {
       const parcela = margem1;
       const liberado = parcela * 45.13142857142857;
       const comissao = liberado * 0.0076;
-      return { ativa: true, parcela, liberado, comissao, prazo: 120, name: 'Margem A ( 35%)' };
+      return { ativa: true, parcela, liberado, comissao, prazo: 120, name: 'Margem A ( 40%)' };
     }
-    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem A ( 35%)' };
+    return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem A ( 40%)' };
   }, [margem1]);
 
   const calcM2 = useMemo(() => {
-    if (margem2 >= 36.00) {
+    if (margem2 >= 20.00) {
       const parcela = margem2 * 0.85;
       const liberado = parcela * 17.63855421686747;
-      const comissao = liberado * 0.08;
+      const comissao = liberado * 0.04;
       return { ativa: true, parcela, liberado, comissao, prazo: 60, name: 'Margem B (5%)' };
     }
     return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem B (5%)' };
   }, [margem2]);
 
   const calcM3 = useMemo(() => {
-    if (margem3 >= 36.00) {
+    if (margem3 >= 20.00) {
       const parcela = margem3 * 0.85;
       const liberado = parcela * 17.63855421686747;
-      const comissao = liberado * 0.08;
+      const comissao = liberado * 0.04;
       return { ativa: true, parcela, liberado, comissao, prazo: 60, name: 'Margem C (5%)' };
     }
     return { ativa: false, parcela: 0, liberado: 0, comissao: 0, prazo: 0, name: 'Margem C (5%)' };
@@ -230,7 +230,7 @@ function App() {
 
         <div className="glass-panel">
           <div className="input-grid">
-            <CurrencyInput id="m1" label="Margem A ( 35%)" value={margem1} onChange={setMargem1} />
+            <CurrencyInput id="m1" label="Margem A ( 40%)" value={margem1} onChange={setMargem1} />
             <CurrencyInput id="m2" label="Margem B (5%)" value={margem2} onChange={setMargem2} />
             <CurrencyInput id="m3" label="Margem C (5%)" value={margem3} onChange={setMargem3} />
           </div>
@@ -240,7 +240,7 @@ function App() {
       {/* Coluna 2: Resultados */}
       <div className="col-results">
         <div className="results-list">
-          {renderCard("Margem A ( 35%)", calcM1, margem1 < 0)}
+          {renderCard("Margem A ( 40%)", calcM1, margem1 < 0)}
           {renderCard("Margem B (5%)", calcM2, margem2 < 0)}
           {renderCard("Margem C (5%)", calcM3, margem3 < 0)}
         </div>
@@ -284,13 +284,13 @@ function App() {
               )}
               {calcM2.ativa && (
                 <div className="comissao-item">
-                  <span>Margem B (8,00%)</span>
+                  <span>Margem B (4,00%)</span>
                   <span>{formatCurrency(calcM2.comissao)}</span>
                 </div>
               )}
               {calcM3.ativa && (
                 <div className="comissao-item">
-                  <span>Margem C (8,00%)</span>
+                  <span>Margem C (4,00%)</span>
                   <span>{formatCurrency(calcM3.comissao)}</span>
                 </div>
               )}
