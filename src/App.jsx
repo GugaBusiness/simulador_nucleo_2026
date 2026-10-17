@@ -74,7 +74,7 @@ function App() {
 
   // Calcula Ofertas
   const calcM1 = useMemo(() => {
-    if (margem1 >= 60.00) {
+    if (margem1 >= 50.00) {
       const parcela = margem1;
       const liberado = parcela * 45.13142857142857;
       const comissao = liberado * 0.0076;
